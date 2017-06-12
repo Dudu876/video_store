@@ -1,0 +1,13 @@
+{
+  "name": "starter-node-angular",
+  "version": "1.0.0",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "font-awesome": "latest",
+    "animate.css": "latest",
+    "jquery": "latest",
+    "angular": "^1.6.2",
+    "angucomplete-alt": "^3.0.0",
+    "angular-bootstrap": "^2.5.0"
+  }
+}

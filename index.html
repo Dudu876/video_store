@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <base href="/">
+
+    <title>myApp</title>
+
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/angucomplete-alt/angucomplete-alt.css">
+    <link rel="stylesheet" href="bower_components/angular-bootstrap/ui-bootstrap-csp.css">
+    <link rel="stylesheet" href="bower_components/src/simple-autocomplete.css">
+    <link rel="stylesheet" href="public/stylesheets/style.css">
+
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/bower_components/angular/angular.min.js"></script>
+    <script src="/bower_components/angucomplete-alt/dist/angucomplete-alt.min.js"></script>
+    <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="/bower_components/src/simple-autocomplete.js"></script>
+
+    <script src="angular.js"></script>
+    <script src="/controllers/mainCtrl.js"></script>
+
+    <script src="/services/dataService.js"></script>
+
+</head>
+
+<body ng-controller="mainCtrl">
+
+    <div class="container">
+
+        <h2>Search Form</h2>
+        <form novalidate>
+            <table>
+                <td>
+                    <label>Title:</label><br />
+                    <label>Description:</label><br />
+                    <label>Category:</label><br />
+                    <label>Actor:</label><br />
+                    <label>Language:</label><br />
+                </td>
+                <td>
+                    <input type="text" ng-model="search.title" /><br />
+                    <input type="text" ng-model="search.desc" /><br />
+                    <autocomplete ng-model="search.category" options="categories" on-select="catsel" display-property="name" clear-input="false"></autocomplete>
+                    <autocomplete ng-model="search.actor" options="actors" on-select="actsel" display-property="name" clear-input="false"></autocomplete>
+                    <autocomplete ng-model="search.language" options="languages" on-select="langsel" display-property="name" clear-input="false"></autocomplete>
+                </td>
+            </table>
+
+            <input type="submit" ng-click="go(search)" value="Go" />
+        </form>
+
+        <h2>Results <small>({{totalItems}})</small></h2>
+        <table ng-show="films.length" class="table table-bordered stats">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Desc</th>
+                    <th>Categoty</th>
+                    <th>Year</th>
+                    <th>Language</th>
+                    <th>Length</th>
+                    <th>Rating</th>
+                    <th>Actors</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="film in films">
+                    <td>{{film.title}}</td>
+                    <td>{{film.description}}</td>
+                    <td>{{film.category}}</td>
+                    <td>{{film.release_year}}</td>
+                    <td>{{film.language}}</td>
+                    <td>{{film.length}}</td>
+                    <td>{{film.rating}}</td>
+                    <td>{{film.actors}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul ng-show="totalItems" uib-pagination total-items="totalItems" items-per-page="50" ng-model="currentPage" ng-change="pageChanged()"></ul>
+    </div>
+</body>
+
+</html>
